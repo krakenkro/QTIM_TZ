@@ -1,0 +1,32 @@
+@import './fonts.scss';
+
+body {
+	font-family: "TTCommons", sans-serif;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	margin: 0;
+    padding: 0;
+	overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*:before, *:after {
+    box-sizing: inherit;
+}
+
+main {
+	flex: 1 0 auto;
+	background: #fff;
+	overflow: hidden;
+}
+
+.container {
+	max-width: 1297px;
+	margin: 0 auto;
+	padding: 0 40px;
+}
