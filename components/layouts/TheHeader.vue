@@ -8,8 +8,8 @@
 			<div class="header__wrapper">
 				<nav class="header__nav" aria-label="Main Navigation">
 					<ul class="header__nav-list">
-						<li><NuxtLink class="header__nav-link" to="/works">Works</NuxtLink></li>
-						<li><NuxtLink class="header__nav-link" to="/about">About</NuxtLink></li>
+						<li><NuxtLink class="header__nav-link" to="/">Works</NuxtLink></li>
+						<li><NuxtLink class="header__nav-link" to="/">About</NuxtLink></li>
 					</ul>
 				</nav>
 
