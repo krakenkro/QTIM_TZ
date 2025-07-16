@@ -1,60 +1,70 @@
 <template>
-  <section class="blog">
-    <h1>Blog</h1>
+	<section class="blog">
+		<div class="container">
+			<h1 class="blog__title">Articles</h1>
 
-    <div class="post-list">
-      <PostCard
-        v-for="post in paginatedPosts"
-        :key="post.id"
-        :id="post.id"
-        :image="post.image"
-        :preview="post.preview"
-      />
-    </div>
+			<div v-if="pending" class="blog__loading">Загрузка...</div>
+			<div v-else-if="error" class="blog__error">Ошибка при загрузке</div>
 
-    <Pagination
-      :currentPage="currentPage"
-      :totalPages="totalPages"
-      @update:page="(page) => (currentPage = page)"
-    />
-  </section>
+			<div v-else class="blog__list">
+				<PostCard
+					v-for="post in paginatedPosts"
+					:key="post.id"
+					:id="post.id"
+					:image="post.image"
+					:preview="post.preview"
+				/>
+			</div>
+
+			<Pagination
+				:currentPage="currentPage"
+				:totalPages="totalPages"
+				@update:page="(page) => (currentPage = page)"
+			/>
+		</div>
+	</section>
 </template>
+
 <script setup lang="ts">
-import { ref, computed, onMounted, reactive } from 'vue'
-import { usePosts } from '@/composables/usePosts'
+import { ref, computed } from 'vue';
+import { usePosts } from '@/composables/usePosts';
 import PostCard from '@/components/posts/PostCard.vue';
 import Pagination from '@/components/Pagination.vue';
-import type { Post } from '@/types/blog';
 
 const currentPage = ref(1);
-const pageSize = 5;
 const postsPerPage = 8;
-const posts = reactive<Post[]>([]);
 
 const { getAllPosts } = usePosts();
 
-posts.value = await getAllPosts();
+const { data: allPosts, pending, error } = await getAllPosts();
+
+const paginatedPosts = computed(() => {
+	if (!allPosts.value) return [];
+	const start = (currentPage.value - 1) * postsPerPage;
+	const end = start + postsPerPage;
+	return allPosts.value.slice(start, end);
+})
 
 const totalPages = computed(() => {
-  return Math.ceil(allPosts.value.length / postsPerPage);
-});
-const paginatedPosts = computed(() => {
-  const start = (currentPage.value - 1) * postsPerPage;
-  const end = start + postsPerPage;
-  return posts.value.slice(start, end);
-});
+	return allPosts.value ? Math.ceil(allPosts.value.length / postsPerPage) : 0;
+})
 </script>
 
-<style scoped>
+<style lang="scss">
 .blog {
-  padding: 2rem;
+	margin-bottom: 140px;
+	&__title {
+		font-weight: 400;
+		font-size: 84px;
+		margin: 0 0 49px;
+	}
+
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		column-gap: 32px;
+		row-gap: 60px;
+		margin-bottom: 50px;
+	}
 }
-
-.post-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-
 </style>

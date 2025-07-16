@@ -1,75 +1,95 @@
 <template>
-  <div class="pagination">
-    <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">←</button>
+	<div class="pagination">
+		<button :class="['pagination__button', 'pagination__left', currentPage === 1 ? `invisible` : '' ]" @click="changePage(currentPage - 1)" :disabled="currentPage === 1">&laquo;</button>
 
-    <button
-      v-for="page in visiblePages"
-      :key="page"
-      @click="changePage(page)"
-      :class="{ active: page === currentPage }"
-    >
-      {{ page }}
-    </button>
+		<button
+			class="pagination__button pagination__num"
+			v-for="page in visiblePages"
+			:key="page"
+			@click="changePage(page)"
+			:class="{ active: page === currentPage }"
+		>
+			{{ page }}
+		</button>
 
-    <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">→</button>
-  </div>
+		<button class="pagination__button pagination__right" @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">&raquo;</button>
+	</div>
 </template>
 
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 
 const props = defineProps<{
-  currentPage: number;
-  totalPages: number;
+	currentPage: number;
+	totalPages: number;
 }>();
+
 const { currentPage, totalPages } = toRefs(props);
 
 const emit = defineEmits<{
-  (e: 'update:page', page: number): void;
+  	(e: 'update:page', page: number): void;
 }>();
 
 const changePage = (page: number) => {
-	console.log(`Changing to page: ${page}`);
-  if (page >= 1 && page <= totalPages.value) {
-    emit('update:page', page);
-  }
+	if (page >= 1 && page <= totalPages.value) {
+		emit('update:page', page);
+	}
 };
 
 const visiblePages = computed(() => {
-  const pages: number[] = [];
-  let start = Math.max(1, currentPage.value - 2);
-  let end = Math.min(totalPages.value, start + 4);
+	const maxVisiblePages = 5;
+	const halfVisible = Math.floor(maxVisiblePages / 2);
+	
+	let start = Math.max(1, currentPage.value - halfVisible);
+	const end = Math.min(totalPages.value, start + maxVisiblePages - 1);
+	
 
-  if (end - start < 4) {
-    start = Math.max(1, end - 4);
-  }
-
-  for (let i = start; i <= end; i++) {
-    pages.push(i);
-  }
-
-  return pages;
+	start = Math.max(1, end - maxVisiblePages + 1);
+	
+	return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 });
 </script>
 
-<style scoped>
+<style lang="scss">
 .pagination {
-  margin-top: 2rem;
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
+	display: flex;
+	gap: 8px;
 
-.pagination button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #eee;
-  cursor: pointer;
-}
+	&__button {
+		font-size: 16px;
+		cursor: pointer;
+		width: 48px;
+		height: 48px;
+		border-radius: 12px;
+		border: none;
+		background-color: #F3F3F3;
 
-.pagination button.active {
-  background: #007bff;
-  color: white;
+		&:focus, &:hover, &:active {
+			background-color: #E8E8E8;
+		}
+	}
+
+	.active {
+		color: #fff;
+		background-color: #000;
+
+		&:focus, &:hover, &:active {
+			background-color: #000;
+		}
+	}
+
+	&__left.invisible {
+		opacity: 0;
+	}
+
+	&__left {
+		opacity: 1;
+	}
+
+	&__left,
+	&__right {
+		background-color: #fff;
+		border: 1px solid #E8E8E8;
+	}
 }
 </style>

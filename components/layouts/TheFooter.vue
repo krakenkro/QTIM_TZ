@@ -13,7 +13,7 @@
 						<a class="footer__link" href="mailto:qtim@agency.com">qtim@agency.com</a>
 					</div>
 					<div class="footer__location">
-						<div>
+						<div class="footer__address">
 							<span>Office in Russia</span>
 							<address>
 								139 Ruben Station Lake<br />
@@ -23,7 +23,7 @@
 								<IconTelegram />
 							</button>
 						</div>
-						<div>
+						<div class="footer__address">
 							<span>Office in Dubai</span>
 							<address>
 								139 Ruben Station Lake<br />
@@ -48,9 +48,9 @@
 						Telegram
 					</a>
 				</div>
-				<div class="circle-wrapper">
-					<div class="circle">
-						<span class="circle-text">Go</span>
+				<div class="footer__circle-wrapper">
+					<div class="footer__circle">
+						<span class="footer__circle-text">Go</span>
 					</div>
 				</div>
 				<div class="footer__socials">
@@ -68,14 +68,11 @@
 		</div>
 	</footer>
 </template>
+
 <script setup>
 import IconTelegram from '@/components/icons/IconTelegram.vue';
-import { usePosts } from '~/composables/usePosts'
-
-const { getAllPosts } = usePosts()
-const posts = await getAllPosts();
-console.log(posts);
 </script>
+
 <style lang="scss">
 .footer {
 	padding: 140px 0 30px;
@@ -83,6 +80,7 @@ console.log(posts);
 
 	&__question {
 		font-size: 16px;
+		margin-bottom: 56px;
 	}
 
 	&__title {
@@ -105,7 +103,24 @@ console.log(posts);
 	&__contact {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 10px;
+		margin-bottom: 36px;
+	}
+
+	&__location {
+		display: flex;
+		flex-direction: column;
+		gap: 36px;
+	}
+
+	&__address {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		
+		address {
+			font-style: normal;
+		}
 	}
 
 	&__link,
@@ -124,6 +139,9 @@ console.log(posts);
 	}
 
 	&__icon-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		cursor: pointer;
 		border: none;
 		background-color: #000;
@@ -142,34 +160,34 @@ console.log(posts);
 		display: flex;
 		gap: 32px;
 	}
-}
 
-.circle-wrapper {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 150px;
-  overflow: hidden;
-  z-index: 1;
-}
+	&__circle-wrapper {
+		position: absolute;
+		bottom: -30px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 300px;
+		height: 150px;
+		overflow: hidden;
+		z-index: 1;
+	}
 
-.circle {
-  width: 300px;
-  height: 300px;
-  background-color: black;
-  border-radius: 50%;
-  position: relative;
-}
+	&__circle {
+		width: 300px;
+		height: 300px;
+		background-color: black;
+		border-radius: 50%;
+		position: relative;
+	}
 
-.circle-text {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
+	&__circle-text {
+		position: absolute;
+		top: 35%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: white;
+		font-size: 20px;
+		font-weight: bold;
+	}
 }
 </style>

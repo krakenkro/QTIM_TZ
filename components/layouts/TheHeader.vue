@@ -53,6 +53,9 @@
 	}
 
 	&__lang-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		background: none;
 		border: 2px solid rgba(0, 0, 0, 0.1);
 		cursor: pointer;
