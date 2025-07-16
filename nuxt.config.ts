@@ -16,4 +16,7 @@ export default defineNuxtConfig({
 	app: {
 		baseURL: '/QTIM_TZ/', 
 	},
+	nitro: {
+		preset: 'static',
+	}
 })
