@@ -26,17 +26,20 @@ const props = defineProps<{
 
 const { currentPage, totalPages } = toRefs(props);
 
+console.log(totalPages)
 const emit = defineEmits<{
   	(e: 'update:page', page: number): void;
 }>();
 
 const changePage = (page: number) => {
+	console.log(page)
 	if (page >= 1 && page <= totalPages.value) {
 		emit('update:page', page);
 	}
 };
 
 const visiblePages = computed(() => {
+	console.log('test')
 	const maxVisiblePages = 5;
 	const halfVisible = Math.floor(maxVisiblePages / 2);
 	
@@ -48,6 +51,7 @@ const visiblePages = computed(() => {
 	
 	return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 });
+console.log(visiblePages)
 </script>
 
 <style lang="scss">
