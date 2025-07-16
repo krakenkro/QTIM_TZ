@@ -1,75 +1,55 @@
-# Nuxt Minimal Starter
+# QTIM тестовое задание - фронт
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Обзор
+Это блог-приложение, разработанное с использованием Nuxt 3 и TypeScript. Приложение получает статьи из внешнего API и отображает их с пагинацией. Пользователи могут просматривать список всех статей на главной странице и переходить на отдельные страницы для просмотра полного содержания статей.
 
-## Setup
+## Функциональность
+- Отображение списка статей с превью-изображениями
+- Пагинация для навигации по статьям
+- Отдельные страницы для просмотра полного содержания статей
 
-Make sure to install dependencies:
 
+## Технологический стек
+- **Фреймворк**: Nuxt 3
+- **Язык программирования**: TypeScript
+- **Стили**: SCSS
+
+## Структура проекта
+```
+├── components/
+│   ├── posts/
+│   │   └── PostCard.vue       # Компонент карточки для превью статей
+│   └── Pagination.vue         # Компонент пагинации
+├── composables/
+│   └── usePosts.ts            # Композабл для получения данных статей
+├── pages/
+│   ├── posts/
+│   │   └── [id].vue           # Динамический маршрут для отдельных страниц статей
+│   └── index.vue              # Главная страница со списком статей
+└── types/
+    └── blog.ts                # TypeScript интерфейсы для данных блога
+```
+
+## Установка
+
+1. Клонировать репозиторий:
 ```bash
-# npm
+git clone https://github.com/krakenkro/QTIM_TZ.git
+cd QTIM_TZ
+```
+
+2. Установить зависимости:
+```bash
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
+# или
 yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+3. Запустить сервер разработки:
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
+# или
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+4. Открыть браузер и перейти по адресу `http://localhost:3000`
