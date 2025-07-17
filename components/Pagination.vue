@@ -26,7 +26,6 @@ const props = defineProps<{
 
 const { currentPage, totalPages } = toRefs(props);
 
-console.log(totalPages)
 const emit = defineEmits<{
   	(e: 'update:page', page: number): void;
 }>();
@@ -49,7 +48,6 @@ const visiblePages = computed(() => {
 	
 	return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 });
-console.log(visiblePages)
 </script>
 
 <style lang="scss">
