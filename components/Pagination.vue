@@ -36,6 +36,7 @@ const changePage = (page: number) => {
 	}
 };
 
+// Вычисляемые видимые номера страниц для пагинации
 const visiblePages = computed(() => {
 	const maxVisiblePages = 5;
 	const halfVisible = Math.floor(maxVisiblePages / 2);

@@ -23,6 +23,7 @@ defineProps<CardProps>();
 const { baseURL } = useRuntimeConfig().app;
 const defaultImage = `${baseURL}no_image.png`;
 
+// Показывает дефолтное изображение, если картинка не загрузилась
 function handleImageError(event: Event) {
 	const target = event.target as HTMLImageElement | null;
 	if (target) {

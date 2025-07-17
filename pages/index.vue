@@ -19,7 +19,7 @@
 			<Pagination
 				:currentPage="currentPage"
 				:totalPages="totalPages"
-				@update:page="(page) => (currentPage = page)"
+				@update:page="(page: number) => (currentPage = page)"
 			/>
 		</div>
 	</section>
