@@ -32,14 +32,12 @@ const emit = defineEmits<{
 }>();
 
 const changePage = (page: number) => {
-	console.log(page)
 	if (page >= 1 && page <= totalPages.value) {
 		emit('update:page', page);
 	}
 };
 
 const visiblePages = computed(() => {
-	console.log('test')
 	const maxVisiblePages = 5;
 	const halfVisible = Math.floor(maxVisiblePages / 2);
 	

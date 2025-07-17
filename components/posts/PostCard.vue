@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import { useRuntimeConfig } from 'nuxt/app';
+
 interface CardProps {
 	id: string;
 	image: string;
@@ -18,8 +20,8 @@ interface CardProps {
 }
 
 defineProps<CardProps>();
-
-const defaultImage = '/images/no_image.png';
+const { baseURL } = useRuntimeConfig().app;
+const defaultImage = `${baseURL}no_image.png`;
 
 function handleImageError(event: Event) {
 	const target = event.target as HTMLImageElement | null;
